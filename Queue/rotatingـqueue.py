@@ -1,6 +1,4 @@
-class Queue:
-	"""front refer to first item on queue and rear refer to last item """
-	
+class QueueRotating:
 	def __init__(self, length):
 		self.length = length
 		self.queue = [None] * length
@@ -8,8 +6,7 @@ class Queue:
 		self.rear = -1
 	
 	def enqueue(self, data):
-		"""added new item to queue if queue not full"""
-		if self.rear + 1 == self.length:
+		if (self.rear + 1) % self.length == self.front:
 			print('queue is full')
 		elif self.front == -1:
 			self.front = 0
@@ -17,7 +14,7 @@ class Queue:
 			self.queue[self.rear] = data
 		
 		else:
-			self.rear += 1
+			self.rear = (self.rear + 1) % self.length
 			self.queue[self.rear] = data
 	
 	def dequeue(self):
@@ -30,21 +27,33 @@ class Queue:
 			self.rear = -1
 			return self.queue[self.front]
 		else:
-			self.front += 1
+			self.front = (self.front + 1) % self.length
 			return self.queue[self.front]
 	
 	def display(self):
 		if self.front == -1:
 			print('queue is empty')
+		elif self.front <= self.rear:
+			for i in range(self.front, self.rear + 1):
+				print(self.queue[i], end=' ')
+			print()
 		
-		for i in range(self.front, self.rear + 1):
-			print(self.queue[i], end=' ')
+		else:
+			for i in range(self.front, self.length):
+				print(self.queue[i], end=' ')
+			for i in range(0, self.rear + 1):
+				print(self.queue[i], end=' ')
+			print()
 
 
-q1= Queue(3)
+q1 = QueueRotating(5)
 q1.enqueue(1)
-q1.enqueue(2)
-q1.enqueue(3)
-q1.enqueue(4)
+q1.enqueue(12)
+q1.enqueue(13)
+q1.enqueue(14)
+q1.enqueue(15)
 q1.dequeue()
+q1.enqueue(20)
+q1.dequeue()
+q1.enqueue(21)
 q1.display()
