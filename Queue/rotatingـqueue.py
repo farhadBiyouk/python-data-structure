@@ -46,6 +46,7 @@ class QueueRotating:
 			print()
 
 
+
 q1 = QueueRotating(5)
 q1.enqueue(1)
 q1.enqueue(12)
