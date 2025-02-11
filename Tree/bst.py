@@ -59,3 +59,6 @@ root = insert(root, 7)
 root = insert(root, 1)
 
 print(in_order(root))
+
+
+from pygorithm.data_structures.heap import Heap
